@@ -14,17 +14,14 @@ import com.backend.entity.User;
 public interface LoanRepository extends JpaRepository<Loan, Long>{
 	
 
-	/*@Query(
+	@Query(
 			  value = "SELECT * FROM Loans  WHERE user_id = ? \n-- #pageable\n",
 			  countQuery = "SELECT count(*) FROM Loans",
 			  nativeQuery = true)
 	Page<Loan> findByUser(User user, Pageable pageable);
-	*/
 	
 	List<Loan> findByUser(User user);
-	//Page<Loan> findLoanAll(Pageable pageable);
 	
-	Page<Loan> findByUser(User user, Pageable pageable);
 	
 	
 

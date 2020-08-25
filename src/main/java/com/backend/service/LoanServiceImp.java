@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.backend.entity.Loan;
+import com.backend.entity.User;
 import com.backend.repository.LoanRepository;
 
 @Service
@@ -19,8 +20,8 @@ public class LoanServiceImp implements LoanService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Page<Loan> findByUserId(Long userId, Pageable pageable) {
-		return loanRepo.findLoanByuserId(userId, pageable);
+	public Page<Loan> findByUserId(User userId, Pageable pageable) {
+		return loanRepo.findByUser(userId, pageable);
 	}
 
 
@@ -28,7 +29,7 @@ public class LoanServiceImp implements LoanService {
 	@Override
 	@Transactional(readOnly = true)
 	public Page<Loan> findAll(Pageable pages) {
-		return loanRepo.findLoanAll(pages);
+		return loanRepo.findAll(pages);
 	}
 	
 

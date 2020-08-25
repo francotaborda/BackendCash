@@ -10,23 +10,28 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.entity.Loan;
+import com.backend.entity.User;
 import com.backend.models.PageDTO;
 import com.backend.models.PagedResponseDto;
 import com.backend.service.LoanService;
+import com.backend.service.UserService;
 
 @RestController
 @RequestMapping("/loans")
 public class LoanController {
 	@Autowired
 	private LoanService loanService;
+	@Autowired
+	private UserService userService;
 
 	@GetMapping("")
-	public ResponseEntity<?> getUsersPage(@RequestParam(defaultValue = "10") int page,
+	public ResponseEntity<?> getUsersPage(@RequestParam(defaultValue = "1") int page,
 			@RequestParam(defaultValue = "10") int size, Long user_id) {
 
 		Page<Loan> resultPage = null;
 		if(user_id != null) {
-		resultPage = loanService.findByUserId(user_id, PageRequest.of(page, size));
+		User user = userService.findById(user_id);
+		resultPage = loanService.findByUserId(user, PageRequest.of(page, size));
 		}
 		else {
 			resultPage = loanService.findAll(PageRequest.of(page, size));

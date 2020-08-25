@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -21,8 +22,8 @@ public class Loan implements Serializable{
 	
 	@Column(name = "total")
 	private Float total;
-	@Column
-	private Long userId;
+	@OneToOne
+	private User user;
 
 
 	public Long getId() {
@@ -39,14 +40,6 @@ public class Loan implements Serializable{
 
 	public void setTotal(Float total) {
 		this.total = total;
-	}
-	
-	public Long getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Long userId) {
-		this.userId = userId;
 	}
 
 	public Loan() {

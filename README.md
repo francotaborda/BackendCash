@@ -8,6 +8,7 @@ password:
 (contraseña vacia)
 De querer cambiar alguno de estos datos de la base de datos ingresar al application.properties dentro del proyecto y reemplazar los datos de la base de datos que deseé
 
+De querer cambiar el puerto donde se levanta el programa ir a application.properties y quitar el # de server.port y poner el puerto deseado para levantar el programa
 Clonar repo:
 https://github.com/francotaborda/BackendCash.git
 
@@ -29,3 +30,7 @@ dicho valor a update.
 Metodo 2:
 
 Dentro del proyecto hay una carpeta llamada dump, dentro de ella hay un archivo llamado dump.sql. copiar la informacion de este archivo y dentro de la base de datos pegar todo el contenido. Se crearan la tablas y se cargan con datos de prueba.
+
+-------------------------------------------------------------------------------
+Para probar los Endpoints se puede tanto por Postman o swagger
+http://localhost:8080/swagger-ui.html#

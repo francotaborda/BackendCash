@@ -1,11 +1,10 @@
 package com.backend.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.backend.entity.Loan;
 import com.backend.repository.LoanRepository;
@@ -19,32 +18,18 @@ public class LoanServiceImp implements LoanService {
 
 
 	@Override
+	@Transactional(readOnly = true)
 	public Page<Loan> findByUserId(Long userId, Pageable pageable) {
-		//return loanRepo.findAllByUserId(userId, pageable);
 		return loanRepo.findLoanByuserId(userId, pageable);
 	}
 
 
 
 	@Override
+	@Transactional(readOnly = true)
 	public Page<Loan> findAll(Pageable pages) {
-		
-		Page<Loan> lst = loanRepo.findAll(pages);
-		lst.getContent();
-		return lst;
+		return loanRepo.findLoanAll(pages);
 	}
-
-
-
-	@Override
-	public List<Loan> findByUserId(Long userId) {
-		return loanRepo.findAllByUserId(userId);
-	}
-
-
-	
-
-
 	
 
 }

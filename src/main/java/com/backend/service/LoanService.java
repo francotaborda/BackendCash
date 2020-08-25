@@ -13,9 +13,6 @@ public interface LoanService {
 
 	Page<Loan> findAll(Pageable pages);
 
-	List<Loan> findByUserId(Long userId);
-
-	//List<Loan> findByUserId(Long userId);
 	
 	
 

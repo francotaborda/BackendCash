@@ -3,7 +3,6 @@ package com.backend.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,8 +24,13 @@ public class LoanController {
 	public ResponseEntity<?> getUsersPage(@RequestParam(defaultValue = "10") int page,
 			@RequestParam(defaultValue = "10") int size, Long user_id) {
 
-		//Pageable pages = PageRequest.of(page, size);
-		Page<Loan> resultPage = loanService.findByUserId(user_id, PageRequest.of(page, size));
+		Page<Loan> resultPage = null;
+		if(user_id != null) {
+		resultPage = loanService.findByUserId(user_id, PageRequest.of(page, size));
+		}
+		else {
+			resultPage = loanService.findAll(PageRequest.of(page, size));
+		}
 		
 
 		PageDTO pageDto = new PageDTO();
@@ -40,16 +44,5 @@ public class LoanController {
 		return ResponseEntity.ok(response);
 	}
 
-	@GetMapping("list/")
-	public ResponseEntity<?> getUsersList(Long userId) {
-		return ResponseEntity.ok(loanService.findByUserId(userId));
-	}
-	
-	@GetMapping("list/asd")
-	public ResponseEntity<?> getUsersPagAll(@RequestParam(defaultValue = "10") int page,
-			@RequestParam(defaultValue = "10") int size) {
-		Pageable pages = PageRequest.of(page, size);
-		return ResponseEntity.ok(loanService.findAll(pages));
-	}
 
 }

@@ -1,13 +1,14 @@
 package com.backend.models;
 
+import javax.validation.constraints.Email;
 
 public class UserRequest {
-	
 	
 	private String firstName;
 
 	private String lastName;
 
+	@Email
 	private String email;
 	
 
